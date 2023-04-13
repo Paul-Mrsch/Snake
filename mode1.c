@@ -18,11 +18,18 @@ I : Un snake qui ne bouge pas tant que l'user n'a pas choisi ou aller
 #include <stdio.h>
 #include <stdlib.h>
 #define ROWS 20
-#define COLS 200
+#define COLS 20
 
 void mode1(){
     //variable gameover
     int GameOver = 0;
+
+    //position de la tete du serpent
+    int headX = 10;
+    int headY = 14;
+
+    //variable pour savoir si la pomme est mangée
+    int on_apple = 0;
 
     //fonction pour créer le plateau de jeu
     int board[ROWS][COLS];
@@ -84,45 +91,86 @@ void mode1(){
 
     void up_snake(Snake *snake, int row, int col){
         enqueue(snake, row-1, col);
-        dequeue(snake);
+        if (on_apple == 1){
+            on_apple = 0;
+        } else {
+            dequeue(snake);
+        }
+        headX--;
     }
     
     void down_snake(Snake *snake, int row, int col){
         enqueue(snake, row+1, col);
-        dequeue(snake);
+        if (on_apple == 1){
+            on_apple = 0;
+        } else {
+            dequeue(snake);
+        }
+        headX++;
     }
 
     void left_snake(Snake *snake, int row, int col){
         enqueue(snake, row, col-1);
-        dequeue(snake);
+        if (on_apple == 1){
+            on_apple = 0;
+        } else {
+            dequeue(snake);
+        }
+        headY--;
     }
 
     void right_snake(Snake *snake, int row, int col){
         enqueue(snake, row, col+1);
-        dequeue(snake);
+        if (on_apple == 1){
+            on_apple = 0;
+        } else {
+            dequeue(snake);
+        }
+        headY++;
+    }
+
+    void apple(){
+        int appleX = rand() % (ROWS-2) + 1;
+        int appleY = rand() % (COLS-2) + 1;
+        board[appleX][appleY] = 2;
     }
 
     void check_snake(Snake *snake, int row, int col){
         if (board[row][col] == 1){
             GameOver = 1;
-        } else if (row == 0 || row == ROWS-1 || col == 0 || col == COLS-1){
+        }
+    }
+
+    void check_apple(Snake *snake, int row, int col){
+        if (board[row][col] == 2){
+            on_apple = 1;
+            apple();
+        }
+    }
+
+    void check_gameover(Snake *snake, int row, int col){
+        if (row == 0 || row == ROWS-1 || col == 0 || col == COLS-1){
             GameOver = 1;
         }
     }
 
     Snake snake = { NULL, NULL };
 
+    void check(int row, int col){
+        check_snake(&snake, row, col);
+        check_apple(&snake, row, col);
+        check_gameover(&snake, row, col);
+    }
+
+   
+
     // Ajouter trois parties du serpent à la liste
-    enqueue(&snake, 10, 59);
-    enqueue(&snake, 10, 60);
-    enqueue(&snake, 10, 61);
-    enqueue(&snake, 10, 62);
-    enqueue(&snake, 10, 63);
+    enqueue(&snake, 10, 10);
+    enqueue(&snake, 10, 11);
+    enqueue(&snake, 10, 12);
+    enqueue(&snake, 10, 13);
+    enqueue(&snake, 10, 14);
 
-
-    //position de la tete du serpent
-    int headX = 10;
-    int headY = 63;
 
     //fonction pour afficher le plateau de jeu avec un affichage d'une bordure autour
     void printBoard(char dir){
@@ -133,6 +181,10 @@ void mode1(){
                     printf("%c", dir);
                 } else if (board[i][j] == 1){
                     printf("0");
+                } else if (board[i][j] == 2){
+                    printf("\033[1;31m");
+                    printf("X");
+                    printf("\033[0m");
                 } else if (i == 0 || i == ROWS-1){
                     printf(".");
                 } else if (j == 0 || j == COLS-1){
@@ -145,8 +197,7 @@ void mode1(){
         }
     }
 
-    
-
+    apple();
     printBoard('>');
     while (GameOver == 0){
         //fonction pour afficher le serpent
@@ -156,45 +207,41 @@ void mode1(){
         switch (direction){
             case 'z':
                 //fonction pour déplacer le serpent vers le haut
-                check_snake(&snake, headX-1, headY);
+                check(headX-1, headY);
                 if (GameOver == 1){
                     break;
                 }
                 up_snake(&snake, headX, headY);
-                headX--;
                 printBoard('^');
                 printf("\n");
                 break;
             case 's':
                 //fonction pour déplacer le serpent vers le bas
-                check_snake(&snake, headX+1, headY);
+                check(headX+1, headY);
                 if (GameOver == 1){
                     break;
                 }
                 down_snake(&snake, headX, headY);
-                headX++;
                 printBoard('v');
                 printf("\n");
                 break;
             case 'q':
                 //fonction pour déplacer le serpent vers la gauche
-                check_snake(&snake, headX, headY-1);
+                check(headX, headY-1);
                 if (GameOver == 1){
                     break;
                 }
                 left_snake(&snake, headX, headY);
-                headY--;
                 printBoard('<');
                 printf("\n");
                 break;
             case 'd':
                 //fonction pour déplacer le serpent vers la droite
-                check_snake(&snake, headX, headY+1);
+                check(headX, headY+1);
                 if (GameOver == 1){
                     break;
                 }
                 right_snake(&snake, headX, headY);
-                headY++;
                 printBoard('>');
                 printf("\n");
                 break;
@@ -207,6 +254,7 @@ void mode1(){
                 break;
         }
         direction = '0';
+        on_apple = 0;
         if (GameOver == 1){
             printBoard('X');
         }
