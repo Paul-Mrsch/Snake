@@ -1,0 +1,3 @@
+Il faut rajouter/changer une fonction qui fait continuer le jeu sans rajouter de pomme s'il en a deja full
+
+Puis changer la fonction deck win pour verifier s'il y a que du snake et donc victoire
