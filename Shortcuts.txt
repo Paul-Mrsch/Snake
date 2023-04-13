@@ -1,0 +1,17 @@
+Copy line Up/Down :
+Shift + Alt + Flèches
+
+Move line Up/Down :
+Alt + Flèches
+
+Switch between editors :
+Ctrl + 1/2/3 etc
+
+Zen mode :
+Ctrl + K, Z
+
+Toggle sidebar :
+Ctrl + B
+
+Command palette :
+Ctrl + Shift + P

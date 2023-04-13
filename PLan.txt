@@ -1,0 +1,51 @@
+Snake
+
+Modèle :  
+
+Un snake qui bouge pas tant que l'user n'a pas choisi ou aller                          (simple)
+OU
+Un snake qui bouge tout seul et qui se dirige vers la nourriture                        (moyen)
+OU 
+Un snake qui bouge tout seul et qui change de direction si l'user appuie sur une touche (difficile)
+
+I : Un snake qui ne bouge pas tant que l'user n'a pas choisi ou aller
+
+    * une structure de données pour stocker les coordonnées de la tête du serpent
+    * une structure de données pour stocker les coordonnées du corps du serpent
+    * une structure de données pour stocker les coordonnées de la nourriture
+    * une fonction pour afficher le serpent
+    * une fonction pour afficher la nourriture
+    * une fonction pour déplacer le serpent
+    * une fonction pour déplacer la nourriture
+    * une fonction pour vérifier si le serpent a mangé la nourriture
+    * une fonction pour vérifier si le serpent est mort
+    * une fonction pour vérifier si le serpent a atteint la fin du jeu
+    * une fonction pour gérer les entrées clavier
+
+II : Un snake qui bouge tout seul et qui se dirige vers la nourriture
+
+    * une structure de données pour stocker les coordonnées de la tête du serpent
+    * une structure de données pour stocker les coordonnées du corps du serpent
+    * une structure de données pour stocker les coordonnées de la nourriture
+    * une fonction pour afficher le serpent
+    * une fonction pour afficher la nourriture
+    * une fonction pour déplacer le serpent en fonction de la nourriture
+    * une fonction pour déplacer la nourriture
+    * une fonction pour vérifier si le serpent a mangé la nourriture
+    * une fonction pour vérifier si le serpent est mort
+    * une fonction pour vérifier si le serpent a atteint la fin du jeu
+    * une fonction pour gérer les entrées clavier
+
+III : Un snake qui bouge tout seul et qui change de direction si l'user appuie sur une touche
+
+    * une structure de données pour stocker les coordonnées de la tête du serpent
+    * une structure de données pour stocker les coordonnées du corps du serpent
+    * une structure de données pour stocker les coordonnées de la nourriture
+    * une fonction pour afficher le serpent
+    * une fonction pour afficher la nourriture
+    * une fonction pour déplacer le serpent dans la meme direction tant que l'user n'a pas appuyé sur une touche
+    * une fonction pour déplacer la nourriture
+    * une fonction pour vérifier si le serpent a mangé la nourriture
+    * une fonction pour vérifier si le serpent est mort
+    * une fonction pour vérifier si le serpent a atteint la fin du jeu
+    * une fonction pour gérer les entrées clavier
