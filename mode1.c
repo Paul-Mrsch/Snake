@@ -25,8 +25,8 @@ void mode1(){
     int GameOver = 0;
 
     //position de la tete du serpent
-    int headX = 10;
-    int headY = 25;
+    int headX = 2;
+    int headY = 3;
 
     //variable pour savoir si le serpent est sur l'emplacement de la pomme
     int is_snake = 0;
@@ -34,14 +34,17 @@ void mode1(){
     //variable pour savoir si la pomme est mangée
     int on_apple = 0;
 
+    //variable pour savoir si il ne reste plus de place pour les pommmes
+    int full_apple = 0;
+
     //fonction pour créer le plateau de jeu
     int board[ROWS][COLS];
     for (int i = 0; i < ROWS; i++){
         for (int j = 0; j < COLS; j++){
             if (i == 0 || i == ROWS-1) {
-                board[i][j] = -1;
+                board[i][j] = -1; // -1 pour les bords hauts
             } else if (j == 0 || j == COLS-1) {
-                board[i][j] = -2;
+                board[i][j] = -2; // -2 pour les bords bas
             } else {
                 board[i][j] = 0;
             }
@@ -92,9 +95,9 @@ void mode1(){
 
     Snake snake = { NULL, NULL };
     // Ajouter les premières parties du serpent à la liste
-    enqueue(&snake, 10, 23 );
-    enqueue(&snake, 10, 24 );
-    enqueue(&snake, 10, 25 );
+    enqueue(&snake, 2, 1 );
+    enqueue(&snake, 2, 2);
+    enqueue(&snake, 2, 3);
 
     //fonction pour faire monter le serpent
     void up_snake(Snake *snake, int row, int col){
@@ -142,17 +145,22 @@ void mode1(){
 
     //fonction de vérification de victoire
     void check_win(){
-        printf("check_win \n");
         int temp = 0;
+        full_apple = 0;
         for (int i = 0; i < ROWS; i++){
             for (int j = 0; j < COLS; j++){
                 if (board[i][j] == 0){
-                    temp = 1;
+                    temp = 1; 
+                } else if (board[i][j] == 2){
+                    full_apple = 2;
                 }
             }
         }
-        if (temp == 0){
+        if (temp == 0 && full_apple == 2){
+        } else if (temp == 0 && full_apple == 0){
             GameOver = 2;
+        } else {
+            full_apple = 0;
         }
     }
 
@@ -180,7 +188,10 @@ void mode1(){
     void check_apple(Snake *snake, int row, int col){
         if (board[row][col] == 2){
             on_apple = 1;
+            if (full_apple == 2){
+            } else {
             apple();
+            }
         }
     }
 
@@ -227,7 +238,7 @@ void mode1(){
                             printf(" W ");
                         }   
                     } else if (board[i][j] == -1){
-                        printf("---");
+                        printf("- -");
                     } else if (board[i][j] == 2){
                         printf("\033[1;31m");
                         printf(" X ");
@@ -247,7 +258,7 @@ void mode1(){
                         printf(" 0 ");
                     } else if (board[i][j] == 2){
                         printf("\033[1;31m");
-                        printf(" X ");
+                        printf(" %c ", 36);
                         printf("\033[0m");
                     } else if (board[i][j] == -1){
                         printf("---");
@@ -261,11 +272,11 @@ void mode1(){
             }
         }
     }
-    for (int i = 0; i < 857; i++){
+
+    //création des pommes en fonction de i
+    for (int i = 0; i < 10; i++){
         apple();
     }
- 
-    apple();
     printBoard('>');
     while (GameOver == 0){
 
