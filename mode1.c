@@ -17,8 +17,8 @@ I : Un snake qui ne bouge pas tant que l'user n'a pas choisi ou aller
 
 #include <stdio.h>
 #include <stdlib.h>
-#define ROWS 20
-#define COLS 50
+#define ROWS 5
+#define COLS 5
 
 void mode1(){
     //variable gameover
@@ -217,7 +217,7 @@ void mode1(){
 
     //fonction pour afficher le plateau de jeu avec un affichage d'une bordure autour
     void printBoard(char dir){
-        system("cls");
+        system("clear");
         //mise a jour du board avec ecris win sur le tableau a la place du snake
         if (GameOver == 2){
             //7 pour W, 8 pour I, 9 pour N
@@ -274,7 +274,7 @@ void mode1(){
     }
 
     //création des pommes en fonction de i
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 2; i++){
         apple();
     }
     printBoard('>');
@@ -353,5 +353,7 @@ void mode1(){
     } else {
         printf("You Win\n");
     }
+    int test;
+    scanf("%s", test);
 
 }

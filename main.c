@@ -7,10 +7,10 @@
 int main(){
     int stop = 0;
     while (stop == 0) {
-        system("cls");
+        system("clear");
         printf("Bienvenue sur mon jeu de snake !\n");
         printf("\n");
-        printf("Ce jeu poss%cde 3 modes :\n", 138);
+        printf("Ce jeu possède 3 modes :\n");
         printf("1. Mode facile\n");
         printf("2. Mode automatique\n");
         printf("3. Mode classique\n");
